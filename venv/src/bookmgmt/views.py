@@ -1,23 +1,25 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import InventoryCreateForm, InventorySearchForm,InventoryUpdateForm
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def home(request):
-	title = 'Welcome: This is the Home Page'
+	title = 'Welcome: This is the BookStore'
 	form ='Welcome: This is the Home page'
 	context = {
-	"title": title,
-	"form":form,
+	  "title": title,
+	  "form":form,
 	}
 	return render(request, "home.html",context)
 def list_items(request):
-	header = 'List of list_items'
+	header = 'List of Books'
 	form = InventorySearchForm(request.POST or None)
 	queryset = Inventory.objects.all()
 	context = {
-	"header": header,
-	"queryset":queryset,
-    "form": form
+	    "header": header,
+	    "queryset":queryset,
+        "form": form
 	}
 	if request.method == 'POST':
 		queryset = Inventory.objects.filter(genre__icontains=form['genre'].value(),
@@ -55,3 +57,10 @@ def update_items(request, pk):
 		'form':form
 	}
 	return render(request, 'add_items.html', context)
+
+def delete_items(request, pk):
+	queryset = Inventory.objects.get(id=pk)
+	if request.method == 'POST':
+		queryset.delete()
+		return redirect('/list_items')
+	return render(request, 'delete_items.html')

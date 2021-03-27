@@ -43,31 +43,36 @@
 <main role="main" class="container">
   <div class="jumbotron">
     <div class="header">{{header}}</div>
+
     <form method='POST' action=''>{% csrf_token %}
-      <input type="submit" value='Search'/>
+    {{form.as_p}}
+        <input type="submit" value='Search'/>
     </form>
     <br>
-     <div class="display_table">
-      <table class='table'>
-        <thead>
-          <tr>
-            <th>COUNT</th>
-            <th>GENRE</th>
-            <th>BOOKNAME</th>
-            <th>QUANTITY IN STORE</th>
-          </tr>
-        </thead>
-      {% for instance in queryset %}
+
+      <div class="display_table">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>COUNT</th>
+              <th>GENRE</th>
+              <th>BOOKNAME</th>
+              <th>QUANTITY IN STORE</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+        {% for instance in queryset %}
           <tr>
             <td>{{forloop.counter}}</td>
             <td>{{instance.genre}}</td>
             <td><a href="{% url 'update_items' instance.id %}">{{instance.bookname}}</a></td>
             <td>{{instance.quantity}}</td>
+            <td><a href="{% url 'delete_items' instance.id %}">Delete</a></td>
           </tr>
-      {% endfor %}
-    </table>
+       {% endfor %}
+        </table>
+     </div>
    </div>
-  </div>
 </main>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script></body>

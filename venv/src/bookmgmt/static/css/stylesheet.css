@@ -11,16 +11,15 @@ body {
 
 /*Make alternating colors for the table rows*/
 .table tr:nth-child(odd){
-	background: #B8CAE4
+	background: #80000
 }
 
 .table tr:nth-child(even){
-	background: #dae5f4
-}
+	background: #fffff0
 
 th {
-  background-color: #337ab7;
-  color: white;
+  background-color: #dda0dd;
+  color: plum;
 }
 
 .display_table{
@@ -34,7 +33,7 @@ th {
 
 .header {
     font-family: helvetica;
-    color: #337ab7;
+    color: #000080;
     font-size: 50px;
     text-align: center;
     width: 100%;
